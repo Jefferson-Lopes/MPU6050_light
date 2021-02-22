@@ -1,7 +1,7 @@
 /* MPU6050_light library for Arduino
  * 
  * Authors: Jefferson Lopes (github.com/Jefferson-Lopes)
- *              using two MPU's
+ *              add two mpu's compatibility
  *          Romain JL. Fétick (github.com/rfetick)
  *              simplifications and corrections
  *          Tockn (github.com/tockn)
