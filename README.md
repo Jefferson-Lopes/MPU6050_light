@@ -34,7 +34,9 @@ See the LICENSE file
 
 ## Authors
 
-[rfetick](https://github.com/rfetick) : modifications for better memory management, speed and efficiency.
+[Jefferson-Lopes](https://github.com/Jefferson-Lopes) : add two mpu's compatibility
+
+[rfetick](https://github.com/rfetick) : modifications for better memory management, speed and efficiency
 
 [tockn](https://github.com/tockn) : initial author of the library (v1.5.2)
 
