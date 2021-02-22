@@ -34,9 +34,22 @@
 #define DEFAULT_GYRO_COEFF    0.98
 
 class MPU6050{
+  private:
+    TwoWire *wire;
+    int addr;
+	float gyro_lsb_to_degsec, acc_lsb_to_g;
+    float gyroXoffset, gyroYoffset, gyroZoffset;
+	float accXoffset, accYoffset, accZoffset;
+    float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
+    float angleAccX, angleAccY;
+    float angleX, angleY, angleZ;
+    long preInterval;
+    float filterGyroCoef; // complementary filter coefficient to balance gyro vs accelero data to get angle
+
   public:
     // INIT and BASIC FUNCTIONS
 	MPU6050(TwoWire &w);
+    MPU6050(TwoWire &w, int addr);
     byte begin(int gyro_config_num=1, int acc_config_num=0);
 	
 	byte writeData(byte reg, byte data);
@@ -92,18 +105,6 @@ class MPU6050{
 	
 	// UPSIDE DOWN MOUNTING
 	bool upsideDownMounting = false;
-
-
-  private:
-    TwoWire *wire;
-	float gyro_lsb_to_degsec, acc_lsb_to_g;
-    float gyroXoffset, gyroYoffset, gyroZoffset;
-	float accXoffset, accYoffset, accZoffset;
-    float temp, accX, accY, accZ, gyroX, gyroY, gyroZ;
-    float angleAccX, angleAccY;
-    float angleX, angleY, angleZ;
-    long preInterval;
-    float filterGyroCoef; // complementary filter coefficient to balance gyro vs accelero data to get angle
 };
 
 #endif

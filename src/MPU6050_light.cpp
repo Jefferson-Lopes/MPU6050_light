@@ -1,6 +1,8 @@
 /* MPU6050_light library for Arduino
  * 
- * Authors: Romain JL. Fétick (github.com/rfetick)
+ * Authors: Jefferson Lopes (github.com/Jefferson-Lopes)
+ *              using two MPU's
+ *          Romain JL. Fétick (github.com/rfetick)
  *              simplifications and corrections
  *          Tockn (github.com/tockn)
  *              initial author (v1.5.2)
@@ -20,6 +22,15 @@ static float wrap(float angle,float limit){
 
 MPU6050::MPU6050(TwoWire &w){
   wire = &w;
+  this->addr = MPU6050_ADDR;
+  setFilterGyroCoef(DEFAULT_GYRO_COEFF);
+  setGyroOffsets(0,0,0);
+  setAccOffsets(0,0,0);
+}
+
+MPU6050::MPU6050(TwoWire &w, int addr){
+  wire = &w;
+  this->addr = addr;
   setFilterGyroCoef(DEFAULT_GYRO_COEFF);
   setGyroOffsets(0,0,0);
   setAccOffsets(0,0,0);
@@ -41,7 +52,7 @@ byte MPU6050::begin(int gyro_config_num, int acc_config_num){
 }
 
 byte MPU6050::writeData(byte reg, byte data){
-  wire->beginTransmission(MPU6050_ADDR);
+  wire->beginTransmission(addr);
   wire->write(reg);
   wire->write(data);
   byte status = wire->endTransmission();
@@ -50,10 +61,10 @@ byte MPU6050::writeData(byte reg, byte data){
 
 // This method is not used internaly, maybe by user...
 byte MPU6050::readData(byte reg) {
-  wire->beginTransmission(MPU6050_ADDR);
+  wire->beginTransmission(addr);
   wire->write(reg);
   wire->endTransmission(true);
-  wire->requestFrom(MPU6050_ADDR, 1);
+  wire->requestFrom(addr, 1);
   byte data =  wire->read();
   return data;
 }
@@ -125,7 +136,8 @@ void MPU6050::setAccOffsets(float x, float y, float z){
 }
 
 void MPU6050::setFilterGyroCoef(float gyro_coeff){
-  if ((gyro_coeff<0) or (gyro_coeff>1)){ gyro_coeff = DEFAULT_GYRO_COEFF; } // prevent bad gyro coeff, should throw an error...
+  if ((gyro_coeff < 0) || (gyro_coeff > 1)) 
+    gyro_coeff = DEFAULT_GYRO_COEFF; // prevent bad gyro coeff, should throw an error...
   filterGyroCoef = gyro_coeff;
 }
 
@@ -136,19 +148,21 @@ void MPU6050::setFilterAccCoef(float acc_coeff){
 /* CALC OFFSET */
 
 void MPU6050::calcOffsets(bool is_calc_gyro, bool is_calc_acc){
-  if(is_calc_gyro){ setGyroOffsets(0,0,0); }
-  if(is_calc_acc){ setAccOffsets(0,0,0); }
+  if(is_calc_gyro)
+    setGyroOffsets(0,0,0);
+  if(is_calc_acc)
+    setAccOffsets(0,0,0); 
   float ag[6] = {0,0,0,0,0,0}; // 3*acc, 3*gyro
   
   for(int i = 0; i < CALIB_OFFSET_NB_MES; i++){
     this->fetchData();
-	ag[0] += accX;
-	ag[1] += accY;
-	ag[2] += (accZ-1.0);
-	ag[3] += gyroX;
-	ag[4] += gyroY;
-	ag[5] += gyroZ;
-	delay(1); // wait a little bit between 2 measurements
+    ag[0] += accX;
+    ag[1] += accY;
+    ag[2] += (accZ-1.0);
+    ag[3] += gyroX;
+    ag[4] += gyroY;
+    ag[5] += gyroZ;
+    delay(1); // wait a little bit between 2 measurements
   }
   
   if(is_calc_acc){
@@ -167,10 +181,10 @@ void MPU6050::calcOffsets(bool is_calc_gyro, bool is_calc_acc){
 /* UPDATE */
 
 void MPU6050::fetchData(){
-  wire->beginTransmission(MPU6050_ADDR);
+  wire->beginTransmission(addr);
   wire->write(MPU6050_ACCEL_OUT_REGISTER);
   wire->endTransmission(false);
-  wire->requestFrom((int)MPU6050_ADDR, 14);
+  wire->requestFrom((int)addr, 14);
 
   int16_t rawData[7]; // [ax,ay,az,temp,gx,gy,gz]
 
