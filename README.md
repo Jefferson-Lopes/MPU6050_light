@@ -1,4 +1,4 @@
-# MPU6050_light ![bdg](https://img.shields.io/github/license/Jefferson-Lopes/MPU6050_light) ![bdg](https://img.shields.io/github/v/release/Jefferson-Lopes/MPU6050_light) 
+# MPU6050_light ![bdg](https://img.shields.io/github/license/Jefferson-Lopes/TwoMPU6050) ![bdg](https://img.shields.io/github/v/release/Jefferson-Lopes/TwoMPU6050) 
 
 **Lightweight, fast and simple library to communicate with one or two MPU6050's**
 
