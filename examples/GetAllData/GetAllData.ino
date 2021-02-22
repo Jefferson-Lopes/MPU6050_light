@@ -8,7 +8,7 @@
  */
 
 #include "Wire.h"
-#include <MPU6050_light.h>
+#include <TwoMPU6050.h>
 
 MPU6050 mpu(Wire);
 

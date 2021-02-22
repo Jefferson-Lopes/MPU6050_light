@@ -5,7 +5,7 @@
  */
 
 #include "Wire.h"
-#include <MPU6050_light.h>
+#include <TwoMPU6050.h>
 
 #define UPDATE_TIME 10
 

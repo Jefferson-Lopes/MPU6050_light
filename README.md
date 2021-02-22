@@ -1,14 +1,14 @@
-# MPU6050_light ![bdg](https://img.shields.io/github/license/Jefferson-Lopes/TwoMPU6050) ![bdg](https://img.shields.io/github/v/release/Jefferson-Lopes/TwoMPU6050) 
+# TwoMPU6050 ![bdg](https://img.shields.io/github/license/Jefferson-Lopes/TwoMPU6050)
 
 **Lightweight, fast and simple library to communicate with one or two MPU6050's**
 
 :arrows_counterclockwise: Your feedback is important. Any issue or suggestion can be reported to the Github `Issues` section
 
-
 ## Description
 
 The library is made to retrieve accelerometer and gyroscope measurements from the MPU6050. This data is processed using a complementary filter to provide and estimation of tilt angles on X and Y with respect to the horizontal frame. The hypothesis for the validity of these angles are:
-* small linear accelerations (the gravity is the dominant one)
+
+* small linear accelerations (the gravity is the dominant one) 
 * small loop delay between two calls to `update()` so the approximation `angle[t]=angle[t-1]+gyro*dt` is valid
 * heading (angle Z) is valid for small X and Y angles
 

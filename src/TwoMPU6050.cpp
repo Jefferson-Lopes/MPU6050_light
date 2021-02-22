@@ -1,4 +1,4 @@
-/* MPU6050_light library for Arduino
+/* TwoMPU6050 library for Arduino
  * 
  * Authors: Jefferson Lopes (github.com/Jefferson-Lopes)
  *              add two mpu's compatibility
@@ -8,7 +8,7 @@
  *              initial author (v1.5.2)
  */
 
-#include "MPU6050_light.h"
+#include "TwoMPU6050.h"
 #include "Arduino.h"
 
 /* Wrap an angle in the range [-limit,+limit] (special thanks to Edgar Bonet!) */

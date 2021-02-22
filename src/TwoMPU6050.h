@@ -10,8 +10,8 @@
  *                      sensi =    [16384,8192,4096,2048] bit/gravity
 */
 
-#ifndef MPU6050_LIGHT_H
-#define MPU6050_LIGHT_H
+#ifndef TWOMPU6050_H
+#define TWOMPU6050_H
 
 #include "Arduino.h"
 #include "Wire.h"
