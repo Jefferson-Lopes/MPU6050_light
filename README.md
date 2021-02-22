@@ -1,8 +1,6 @@
-# MPU6050_light ![bdg](https://img.shields.io/github/license/rfetick/MPU6050_light) ![bdg](https://img.shields.io/github/v/release/rfetick/MPU6050_light) ![bdg](https://img.shields.io/github/commits-since/rfetick/MPU6050_light/latest)
+# MPU6050_light ![bdg](https://img.shields.io/github/license/Jefferson-Lopes/MPU6050_light) ![bdg](https://img.shields.io/github/v/release/Jefferson-Lopes/MPU6050_light) 
 
-**Lightweight, fast and simple library to communicate with the MPU6050**
-
-:arrow_down: The source code is available at [https://github.com/rfetick/MPU6050_light](https://github.com/rfetick/MPU6050_light)
+**Lightweight, fast and simple library to communicate with one or two MPU6050's**
 
 :arrows_counterclockwise: Your feedback is important. Any issue or suggestion can be reported to the Github `Issues` section
 
@@ -13,6 +11,18 @@ The library is made to retrieve accelerometer and gyroscope measurements from th
 * small linear accelerations (the gravity is the dominant one)
 * small loop delay between two calls to `update()` so the approximation `angle[t]=angle[t-1]+gyro*dt` is valid
 * heading (angle Z) is valid for small X and Y angles
+
+## New feature
+
+Now you can use this library with two MPU's. You just have to tight the AD0 from one MPU to VCC and the other one to GND. The code will be like:
+
+`MPU6050 mpu1(Wire, 0x68);`
+
+`MPU6050 mpu2(Wire, 0x69);`
+
+or you can go with the old style:
+
+`MPU6050 mpu(Wire);`
 
 ## Documentation
 
